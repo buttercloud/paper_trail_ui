@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 4.2.5"
   s.add_dependency "will_paginate"
   s.add_dependency "paper_trail"
+  s.add_dependency "haml-rails", "~> 0.9"
 
   s.add_development_dependency "postgresql"
   s.add_development_dependency "pry-rails"

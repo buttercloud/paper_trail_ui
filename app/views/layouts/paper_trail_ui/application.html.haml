@@ -1,0 +1,9 @@
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title PaperTrailUi
+    = stylesheet_link_tag    "paper_trail_ui/application", media: "all"
+    = javascript_include_tag "paper_trail_ui/application"
+    = csrf_meta_tags
+  %body
+    = yield
