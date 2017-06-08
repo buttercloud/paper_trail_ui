@@ -1,0 +1,48 @@
+.container
+  %h2
+    PaperTrail object details
+  .well
+    %table.table.table-condensed
+      %tr
+        %td
+          PaperTrail ID
+        %td
+          = @version.id
+      %tr
+        %td
+          Item Type
+        %td
+          = @version.item_type
+      %tr
+        %td
+          Event
+        %td
+          = @version.event
+      %tr
+        %td
+          Actor
+        %td
+          = @version.whodunnit
+      %tr
+        %td
+          Created At
+        %td
+          = @version.created_at
+  .row
+    .col-md-12
+      %h3 Details of the object in the system
+      %table.table.table-condensed
+        = render "object_info_row", locals: {key: "Class", value: @version.item_type}
+        - @object.each do |k, v|
+          = render "object_info_row", locals: {key: k, value: v}
+
+
+
+
+
+
+
+
+
+
+

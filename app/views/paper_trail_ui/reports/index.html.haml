@@ -1,5 +1,60 @@
-%ul
-  - @model_names.each do |model_name| 
-    %li 
-      = model_name
+.container
+  %h2
+    PaperTrail report
+  #report.well
+    = search_form_for @query, url: reports_path, html: { class: "form-horizontal" } do |f|
+      .row
+        .span12
+          .form-group
+            = f.label nil, "Search"
+            = f.text_field :item_id_eq,                     |
+              class: "span9 form-control", placeholder: "Search Object ID" |
+        .span12
+          .form-group
+            = f.label :created_at_gteq, "Date"
+            From #{f.text_field :created_at_gteq, value: @query.created_at_gteq.try(:to_date), class: "datepicker span2 form-control", data: { date_format: "yyyy-mm-dd" }}
+            To #{f.text_field :created_at_lteq, value: @query.created_at_lteq.try(:to_date), class: "datepicker span2 form-control", data: { date_format: "yyyy-mm-dd" }}
+          .form-group
+            = f.label nil, "Search Object Data"
+            = f.text_field :object_cont,                     |
+              class: "span9 form-control", placeholder: "Search Object ID" |
 
+      .row
+        .span4
+          .form-group
+            = f.label :item_type_in, "Model Name"
+            = f.select :item_type_in, @model_names, class: "form-control"
+        .span4
+          .form-group
+            = f.label :event_in, "Event"
+            = f.select :event_in, @event_names, class: "form-control"
+      .row 
+        .col-md-4 
+          = f.submit "Filter", class: "btn btn-primary", id: "filter"
+          = link_to "Reset", reports_path, class: "btn btn-success"
+  %p
+    Versions
+    %b= @query.result.count
+
+  %table.table
+    %thead
+      %tr
+        %th #
+        %th= sort_link @query, :item_type, "Model Name"
+        %th ID
+        %th= sort_link @query, :event, "Event"
+        %th= sort_link @query, :whodunnit, "Actor"
+        %th= sort_link @query, :created_at, "Created At"
+        %th Object Data
+
+    %tbody
+      - @versions.each_with_index do |version, index|
+        %tr
+          %td= row_counter_with_paging(index)
+          %td= version.item_type
+          %td= version.item_id
+          %td= version.event
+          %td= version.whodunnit
+          %td= version.created_at.to_s(:day_month_year)
+          %td= link_to "View", report_path(version.id), class: "btn btn-info"
+  = will_paginate @versions
