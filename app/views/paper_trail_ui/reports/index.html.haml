@@ -6,18 +6,18 @@
       .row
         .span12
           .form-group
-            = f.label nil, "Search"
+            = f.label nil, "PaperTrail object ID"
             = f.text_field :item_id_eq,                     |
-              class: "span9 form-control", placeholder: "Search Object ID" |
+              class: "span9 form-control", placeholder: "Search PaperTrail object ID" |
         .span12
           .form-group
             = f.label :created_at_gteq, "Date"
             From #{f.text_field :created_at_gteq, value: @query.created_at_gteq.try(:to_date), class: "datepicker span2 form-control", data: { date_format: "yyyy-mm-dd" }}
             To #{f.text_field :created_at_lteq, value: @query.created_at_lteq.try(:to_date), class: "datepicker span2 form-control", data: { date_format: "yyyy-mm-dd" }}
           .form-group
-            = f.label nil, "Search Object Data"
+            = f.label nil, "Search serialized object data"
             = f.text_field :object_cont,                     |
-              class: "span9 form-control", placeholder: "Search Object ID" |
+              class: "span9 form-control", placeholder: "Search serialized Object Data" |
 
       .row
         .span4
