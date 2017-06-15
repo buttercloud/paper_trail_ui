@@ -4,12 +4,12 @@
   #report.well
     = search_form_for @query, url: reports_path, html: { class: "form-horizontal" } do |f|
       .row
-        .span12
+        .col-md-12
           .form-group
             = f.label nil, "PaperTrail object ID"
             = f.text_field :item_id_eq,                     |
               class: "span9 form-control", placeholder: "Search PaperTrail object ID" |
-        .span12
+        .col-md-12
           .form-group
             = f.label :created_at_gteq, "Date"
             From #{f.text_field :created_at_gteq, value: @query.created_at_gteq.try(:to_date), class: "datepicker span2 form-control", data: { date_format: "yyyy-mm-dd" }}
@@ -20,14 +20,18 @@
               class: "span9 form-control", placeholder: "Search serialized Object Data" |
 
       .row
-        .span4
+        .col-md-4
           .form-group
-            = f.label :item_type_in, "Model Name"
+            = f.label :item_type_eq, "Model Name"
             = f.select :item_type_in, @model_names, class: "form-control"
-        .span4
+        .col-md-4
           .form-group
-            = f.label :event_in, "Event"
+            = f.label :event_eq, "Event"
             = f.select :event_in, @event_names, class: "form-control"
+        .col-md-4
+          .form-group
+            = f.label :whodunnit_eq, "Actor(whodunnit)"
+            = f.select :whodunnit_in, @actor_names, class: "form-control"
       .row 
         .col-md-4 
           = f.submit "Filter", class: "btn btn-primary", id: "filter"
