@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: paper_trail_ui_dev
+  pool: 5
+  username: postgres
+  password: password
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: paper_trail_ui_test
+  pool: 5
+  username: postgres
+  password: password
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: paper_trail_ui_prod
+  pool: 5
+  username: postgres
+  password: password
